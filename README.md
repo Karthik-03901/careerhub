@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CAREERHUB
 
-## Getting Started
+> *"Find your next opportunity."*
 
-First, run the development server:
+A modern recruitment and job search web platform built for **TECH ODYSSEY 2026 — ROUND 2 DEBUGGING CHALLENGE (WEBSITE #5)**.
 
+---
+
+## 🚀 Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Library:** React 19
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4
+- **Icons:** Lucide React
+- **Data Source:** Local mock dataset (Zero external API / backend dependencies)
+
+---
+
+## 🌟 Key Features
+
+- **Explore Opportunities:** Filter through tech jobs across leading employers and hyper-growth startups.
+- **Search & Filters:**
+  - Real-time keyword search across job titles, skills, and descriptions
+  - Multi-city location filtering (San Francisco, New York, Austin, Seattle)
+  - Minimum annual salary thresholds ($60k+, $80k+, $100k+, $120k+, $150k+)
+  - Experience level filtering (Entry, Mid, Senior)
+  - Employment type (Full-time, Part-time, Internship, Contract)
+  - Workplace model (Remote, Hybrid, On-site)
+- **Detailed Job Overviews:** In-depth role descriptions, key responsibilities, requirements, benefits, and skills tags.
+- **Interactive Application Flow:** Applicant modal with document attachment, input validation, and instant confirmation receipt with Application ID.
+- **Saved Jobs & Tracking:** Persistent bookmarking and applicant tracking dashboard.
+- **Featured Employers:** Direct employer directory with company ratings, industry tags, and open positions count.
+
+---
+
+## 🛠️ Local Development
+
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run Development Server
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Production Build
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📋 Organizer Information
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The complete reference bug map and testing instructions are documented in [`docs/bug-map.md`](./docs/bug-map.md).
