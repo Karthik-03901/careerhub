@@ -1,5 +1,12 @@
 import { Job, Company } from '../types/job';
 
+// Reference "now" for relative timestamp math (fixed at module load so all timestamps are consistent)
+const NOW = Date.now();
+const mins = (n: number) => n * 60 * 1000;
+const hours = (n: number) => n * 60 * mins(1);
+const days = (n: number) => n * 24 * hours(1);
+
+// All featured companies — openJobsCount is computed after MOCK_JOBS is defined (see bottom of file)
 export const FEATURED_COMPANIES: Company[] = [
   {
     id: 1,
@@ -7,7 +14,7 @@ export const FEATURED_COMPANIES: Company[] = [
     logo: '🚀',
     industry: 'Cloud Infrastructure & AI',
     location: 'San Francisco, CA',
-    openJobsCount: 12,
+    openJobsCount: 0, // computed below
     rating: 4.8,
     description: 'Pioneering next-generation enterprise AI orchestration engines and high-throughput systems.'
   },
@@ -17,7 +24,7 @@ export const FEATURED_COMPANIES: Company[] = [
     logo: '⚡',
     industry: 'FinTech & Real-Time Payments',
     location: 'New York, NY',
-    openJobsCount: 15,
+    openJobsCount: 0, // computed below
     rating: 4.7,
     description: 'Building ultra-low-latency financial settlement platforms powering millions of global transactions.'
   },
@@ -27,7 +34,7 @@ export const FEATURED_COMPANIES: Company[] = [
     logo: '☁️',
     industry: 'DevOps & Distributed Systems',
     location: 'Seattle, WA',
-    openJobsCount: 8,
+    openJobsCount: 0, // computed below
     rating: 4.9,
     description: 'Empowering engineering teams with autonomous multi-cloud scalability and observability.'
   },
@@ -37,7 +44,7 @@ export const FEATURED_COMPANIES: Company[] = [
     logo: '🔮',
     industry: 'Data Science & Machine Learning',
     location: 'San Francisco, CA',
-    openJobsCount: 7,
+    openJobsCount: 0, // computed below
     rating: 4.6,
     description: 'Transforming petabyte-scale data pipelines into actionable machine intelligence in real time.'
   },
@@ -47,7 +54,7 @@ export const FEATURED_COMPANIES: Company[] = [
     logo: '🧬',
     industry: 'DeepTech & Quantum Computing',
     location: 'San Francisco, CA',
-    openJobsCount: 6,
+    openJobsCount: 0, // computed below
     rating: 4.9,
     description: 'Pushing boundaries in quantum error mitigation, cryptography, and quantum simulation.'
   },
@@ -57,9 +64,29 @@ export const FEATURED_COMPANIES: Company[] = [
     logo: '🛡️',
     industry: 'Cybersecurity & Threat Defense',
     location: 'New York, NY',
-    openJobsCount: 10,
+    openJobsCount: 0, // computed below
     rating: 4.8,
     description: 'Zero-trust cybersecurity defenses and AI-driven automated incident containment systems.'
+  },
+  {
+    id: 7,
+    name: 'Apex Global',
+    logo: '📊',
+    industry: 'Business Intelligence & Analytics',
+    location: 'Austin, TX',
+    openJobsCount: 0, // computed below
+    rating: 4.5,
+    description: 'Empowering enterprise decision-making with advanced BI dashboards and predictive analytics platforms.'
+  },
+  {
+    id: 8,
+    name: 'PixelCraft Studios',
+    logo: '🎨',
+    industry: 'Design & Creative Technology',
+    location: 'New York, NY',
+    openJobsCount: 0, // computed below
+    rating: 4.7,
+    description: 'Crafting pixel-perfect SaaS experiences at the intersection of design systems and user research.'
   }
 ];
 
@@ -77,6 +104,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Remote',
     skills: ['Python', 'FastAPI', 'PostgreSQL', 'Docker', 'Redis'],
     postedDate: '1 day ago',
+    postedAt: NOW - days(1),
     featured: true,
     description: 'We are seeking an experienced Python Developer to design and optimize scalable backend services and asynchronous workers for our flagship distributed platform.',
     responsibilities: [
@@ -104,13 +132,14 @@ export const MOCK_JOBS: Job[] = [
     company: 'Nexus Dynamics',
     companyLogo: '⚡',
     location: 'New York, NY',
-    salary: 110000,
-    salaryFormatted: '$110,000 / yr',
+    salary: 88000,
+    salaryFormatted: '$88,000 / yr',
     experience: '0-2 years',
     jobType: 'Full-time',
     workplaceType: 'Hybrid',
     skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Redux'],
     postedDate: '2 days ago',
+    postedAt: NOW - days(2),
     featured: true,
     description: 'Join our digital experience team to craft lightning-fast, pixel-perfect user interfaces for mission-critical banking and payment dashboards.',
     responsibilities: [
@@ -138,13 +167,14 @@ export const MOCK_JOBS: Job[] = [
     company: 'DataStream AI',
     companyLogo: '🔮',
     location: 'San Francisco, CA',
-    salary: 65000,
-    salaryFormatted: '$65,000 / yr',
+    salary: 32000,
+    salaryFormatted: '$32,000 / yr',
     experience: '0-2 years',
     jobType: 'Internship',
     workplaceType: 'Remote',
     skills: ['Python', 'PyTorch', 'Scikit-learn', 'LLMs', 'Hugging Face'],
     postedDate: 'Just now',
+    postedAt: NOW - mins(5),
     featured: true,
     description: 'Looking for a passionate AI/ML Intern eager to experiment with state-of-the-art transformer architectures, retrieval augmented generation (RAG), and data curation.',
     responsibilities: [
@@ -179,6 +209,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'On-site',
     skills: ['SQL', 'Tableau', 'Power BI', 'Python', 'Excel'],
     postedDate: '3 days ago',
+    postedAt: NOW - days(3),
     featured: false,
     description: 'Seeking a detail-driven Data Analyst to transform complex commercial datasets into executive dashboards, revenue forecasts, and growth insights.',
     responsibilities: [
@@ -213,6 +244,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Hybrid',
     skills: ['Go', 'Node.js', 'Microservices', 'Redis', 'Kafka'],
     postedDate: '1 day ago',
+    postedAt: NOW - days(1) - hours(3),
     featured: true,
     description: 'Join our core platform group to build resilient distributed networking services handling billions of API requests with sub-10ms response times.',
     responsibilities: [
@@ -240,13 +272,14 @@ export const MOCK_JOBS: Job[] = [
     company: 'CloudScale Networks',
     companyLogo: '☁️',
     location: 'Seattle, WA',
-    salary: 60000,
-    salaryFormatted: '$60,000 / yr',
+    salary: 28000,
+    salaryFormatted: '$28,000 / yr',
     experience: '0-2 years',
     jobType: 'Internship',
     workplaceType: 'Remote',
     skills: ['AWS', 'Docker', 'Linux', 'Terraform', 'Bash'],
     postedDate: '4 days ago',
+    postedAt: NOW - days(4),
     featured: false,
     description: 'Exciting summer internship for an aspiring Cloud/DevOps Engineer to learn Infrastructure-as-Code, container orchestration, and multi-region deployment automation.',
     responsibilities: [
@@ -281,6 +314,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Remote',
     skills: ['Figma', 'Design Systems', 'User Research', 'Prototyping', 'Wireframing'],
     postedDate: '2 days ago',
+    postedAt: NOW - days(2) - hours(4),
     featured: false,
     description: 'Help shape intuitive SaaS workflows that users love. We need a creative UI/UX Designer who balances aesthetic elegance with data-driven ergonomics.',
     responsibilities: [
@@ -315,6 +349,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Hybrid',
     skills: ['React', 'Node.js', 'TypeScript', 'GraphQL', 'MongoDB'],
     postedDate: '5 days ago',
+    postedAt: NOW - days(5),
     featured: true,
     description: 'We need an energetic Full Stack Developer who enjoys bridging user delight with robust API contracts and database efficiency.',
     responsibilities: [
@@ -349,6 +384,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Remote',
     skills: ['Kubernetes', 'Docker', 'CI/CD', 'AWS', 'Terraform', 'Prometheus'],
     postedDate: '1 day ago',
+    postedAt: NOW - days(1) - hours(6),
     featured: true,
     description: 'Build and govern bulletproof infrastructure automation. You will manage multiple Kubernetes clusters and zero-downtime deployment pipelines.',
     responsibilities: [
@@ -383,6 +419,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'On-site',
     skills: ['SOC', 'SIEM', 'Penetration Testing', 'Incident Response', 'Splunk'],
     postedDate: '3 days ago',
+    postedAt: NOW - days(3) - hours(2),
     featured: false,
     description: 'Defend enterprise infrastructure against advanced persistent threats (APTs). You will monitor telemetry, hunt threats, and harden security posture.',
     responsibilities: [
@@ -417,6 +454,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Remote',
     skills: ['Apache Spark', 'Snowflake', 'Airflow', 'Python', 'Kafka'],
     postedDate: '2 days ago',
+    postedAt: NOW - days(2) - hours(1),
     featured: false,
     description: 'Design robust ETL/ELT pipelines streaming hundreds of gigabytes per hour to support analytics and automated model training pipelines.',
     responsibilities: [
@@ -451,6 +489,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Hybrid',
     skills: ['Java', 'Spring Boot', 'Kafka', 'MySQL', 'Hibernate'],
     postedDate: '4 days ago',
+    postedAt: NOW - days(4) - hours(5),
     featured: false,
     description: 'Looking for a solid Java Engineer to power transactional enterprise workflows, batch processing jobs, and reliable API services.',
     responsibilities: [
@@ -485,6 +524,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Remote',
     skills: ['React Native', 'Swift', 'Kotlin', 'Redux', 'Mobile CI/CD'],
     postedDate: '6 days ago',
+    postedAt: NOW - days(6),
     featured: false,
     description: 'Lead mobile app development for our consumer fintech app used by over 500,000 active users every month across iOS and Android.',
     responsibilities: [
@@ -519,6 +559,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Hybrid',
     skills: ['Product Strategy', 'Agile', 'Roadmapping', 'Analytics', 'User Discovery'],
     postedDate: '2 days ago',
+    postedAt: NOW - days(2) - hours(8),
     featured: true,
     description: 'Drive the vision and roadmap for developer platform tooling. You will collaborate directly with engineers, designers, and customers to ship high-impact features.',
     responsibilities: [
@@ -553,6 +594,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Remote',
     skills: ['Playwright', 'Cypress', 'Selenium', 'Jest', 'TypeScript'],
     postedDate: '5 days ago',
+    postedAt: NOW - days(5) - hours(3),
     featured: false,
     description: 'Ensure our web applications and APIs operate flawlessly under all conditions by building comprehensive end-to-end automation test suites.',
     responsibilities: [
@@ -587,6 +629,7 @@ export const MOCK_JOBS: Job[] = [
     workplaceType: 'Remote',
     skills: ['Distributed Systems', 'Cloud Architecture', 'High Availability', 'Security', 'Kafka'],
     postedDate: '1 day ago',
+    postedAt: NOW - days(1) - hours(2),
     featured: true,
     description: 'Define technical blueprint and overarching architectural patterns for petabyte-scale distributed computing and quantum simulation infrastructure.',
     responsibilities: [
@@ -609,6 +652,11 @@ export const MOCK_JOBS: Job[] = [
     ]
   }
 ];
+
+// Compute and patch openJobsCount from actual job data so counts always match
+FEATURED_COMPANIES.forEach((company) => {
+  company.openJobsCount = MOCK_JOBS.filter((job) => job.company === company.name).length;
+});
 
 export const LOCATIONS = [
   'All',

@@ -1,0 +1,92 @@
+{
+  "pbtResults": {
+    "1. Write bug condition exploration tests": {
+      "status": "passed",
+      "failingExample": "All 10 exploration tests FAILED on unfixed code (confirming all three bugs exist):\n\nBUG-05 Counterexamples:\n- handleFileChange(File('photo.png')): no error message shown; file stored in state (TestingLibraryElementError: Unable to find /only pdf, doc, or docx files are accepted/i)\n- handleFileChange(File('notes.txt')): input value NOT cleared; error not shown\n- handleFileChange(File('malware.exe')): same — file accepted without error\n\nBUG-06 Counterexamples:\n- handleSubmit({ fullName:'Alice', email:'', phone:'', resumeFile:null }): onSubmitSuccess WAS called; error message never shown\n- handleSubmit({ fullName:'Alice', email:'alice@ex.com', phone:'5550001', resumeFile:null }): submission proceeded despite missing resume\n- handleSubmit({ email:'alice@ex.com', fullName:'', phone:'', resumeFile:null }): submission proceeded\n- handleSubmit({ fullName:'Alice', email:'alice@ex.com', phone:'', resumeFile:null }): submission proceeded\n\nBUG-07 Counterexamples:\n- JobCard root div: classList.contains('min-w-[390px]') = true (Expected: false)\n- JobCard root div: classList.contains('-mb-8') = true (Expected: false)\n- JobCard root div: classList.contains('w-full') = false (Expected: true)",
+      "lastRunTimestamp": 1790672186213
+    }
+  },
+  "executionHistory": {
+    "1. Write bug condition exploration tests": [
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790671923659
+      },
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790671933710
+      },
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790672207026
+      }
+    ],
+    "2. Write preservation property tests (BEFORE implementing fix)": [
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790671925660
+      },
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790672211169
+      },
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790672349275
+      }
+    ],
+    "3.1 Fix BUG-05 — Resume file type validation in `handleFileChange`": [
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790671925872
+      },
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790672353165
+      }
+    ],
+    "3.2 Fix BUG-06 — Required-field validation logic in `handleSubmit`": [
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790671926112
+      }
+    ],
+    "3.3 Fix BUG-07 — Mobile card layout in `JobCard.tsx`": [
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790671926616
+      }
+    ],
+    "3.4 Verify bug condition exploration tests now pass": [
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790671926781
+      }
+    ],
+    "3.5 Verify preservation tests still pass": [
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790671926840
+      }
+    ],
+    "4. Checkpoint — Ensure all tests pass": [
+      {
+        "executionId": "3be7a0ab-30e7-4b3f-9f4e-4fd0aedee421",
+        "chatSessionId": "sess_b7fbf506-5a69-49a0-9759-1af759baa3db",
+        "timestamp": 1790671926917
+      }
+    ]
+  }
+}

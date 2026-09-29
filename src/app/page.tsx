@@ -36,25 +36,11 @@ export default function Home() {
   // Sorting
   const [sortOption, setSortOption] = useState<SortOption>('recent');
 
-  // Saved Jobs
-  const [savedJobIds, setSavedJobIds] = useState<number[]>([1, 5]);
+  // Saved Jobs — starts empty; no pre-seeded demo state
+  const [savedJobIds, setSavedJobIds] = useState<number[]>([]);
 
-  // Applications
-  const [applications, setApplications] = useState<Application[]>([
-    {
-      id: 'APP-2026-9A102',
-      jobId: 2,
-      jobTitle: 'Frontend Developer',
-      companyName: 'Nexus Dynamics',
-      fullName: 'Alex Morgan',
-      email: 'alex.morgan@example.com',
-      phone: '+1 (555) 234-5678',
-      experience: '0-2 years',
-      resumeFileName: 'Alex_Morgan_Frontend_Resume.pdf',
-      appliedDate: 'Yesterday',
-      status: 'Under Review',
-    },
-  ]);
+  // Applications — starts empty; no pre-seeded demo state
+  const [applications, setApplications] = useState<Application[]>([]);
 
   // Modals state
   const [selectedDetailsJob, setSelectedDetailsJob] = useState<Job | null>(null);
@@ -115,10 +101,9 @@ export default function Home() {
     );
   };
 
-  // Trigger Apply Now
+  // Trigger Apply Now — always applies to the job the user actually clicked
   const handleApplyNow = (job: Job) => {
-    const target = jobs[0] || job;
-    setSelectedApplyJob(target);
+    setSelectedApplyJob(job);
     setIsApplyModalOpen(true);
   };
 
@@ -133,23 +118,25 @@ export default function Home() {
   // Filter Calculation
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
-      // Keyword matching
+      // Keyword matching: job fields must contain the keyword (not the other way around)
       if (filters.keyword.trim()) {
         const kw = filters.keyword.toLowerCase().trim();
-        const matches = kw.includes(job.title.toLowerCase());
-        if (!matches) return false;
+        const inTitle   = job.title.toLowerCase().includes(kw);
+        const inCompany = job.company.toLowerCase().includes(kw);
+        const inSkills  = job.skills.some((s) => s.toLowerCase().includes(kw));
+        if (!inTitle && !inCompany && !inSkills) return false;
       }
 
-      // Location matching
+      // Location matching: exclude jobs that don't match (was inverted)
       if (filters.location && filters.location !== 'All') {
-        if (job.location === filters.location) {
+        if (job.location !== filters.location) {
           return false;
         }
       }
 
-      // Salary matching
+      // Salary matching: exclude jobs below the minimum (was inverted)
       if (filters.minSalary > 0) {
-        if (job.salary > filters.minSalary) {
+        if (job.salary < filters.minSalary) {
           return false;
         }
       }
@@ -182,10 +169,12 @@ export default function Home() {
       case 'salary-low':
         return result.sort((a, b) => a.salary - b.salary);
       case 'experience':
+        // Sort by experience band: 0-2 < 3-5 < 5+
         return result.sort((a, b) => a.experience.localeCompare(b.experience));
       case 'recent':
       default:
-        return result.sort((a, b) => a.id - b.id);
+        // Descending: newest postedAt first
+        return result.sort((a, b) => b.postedAt - a.postedAt);
     }
   }, [filteredJobs, sortOption]);
 

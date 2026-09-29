@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Logo & Brand */}
           <div className="flex items-center gap-8">
             <button
-              onClick={onNavigateHome}
+              onClick={() => { onNavigateHome(); setIsMobileMenuOpen(false); }}
               className="flex items-center gap-2.5 text-left group cursor-pointer focus:outline-hidden"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">

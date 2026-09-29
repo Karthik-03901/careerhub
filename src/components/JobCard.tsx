@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Job } from '../types/job';
-import { MapPin, DollarSign, Clock, Bookmark, ArrowUpRight, Check } from 'lucide-react';
+import { MapPin, DollarSign, Clock, Bookmark, ArrowUpRight } from 'lucide-react';
 
 interface JobCardProps {
   job: Job;
@@ -21,7 +21,7 @@ export const JobCard: React.FC<JobCardProps> = ({
 }) => {
   return (
     <div
-      className="job-card bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between group min-w-[390px] md:min-w-0 -mb-8 md:mb-0 relative z-10"
+      className="job-card bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between group w-full mb-0 relative z-10"
     >
       <div>
         {/* Top Header: Company + Save Button */}

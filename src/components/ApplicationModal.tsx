@@ -28,6 +28,15 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
 
   if (!isOpen || !job) return null;
 
+  const resetForm = () => {
+    setFullName('');
+    setEmail('');
+    setPhone('');
+    setExperience('0-2 years');
+    setCoverLetter('');
+    setResumeFile(null);
+    setFormError('');
+  };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -38,7 +47,10 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
     // Verification check for resume document
     const isSupported = allowedExtensions.includes(extension);
     if (!isSupported) {
-      console.warn(`File format ${extension} uploaded.`);
+      setFormError('Only PDF, DOC, or DOCX files are accepted.');
+      setResumeFile(null);
+      e.target.value = '';
+      return;
     }
 
     setResumeFile(file);
@@ -49,9 +61,9 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
     e.preventDefault();
     setFormError('');
 
-    // Required fields check: Full Name, Email, Phone
-    if (!fullName.trim() && !email.trim() && !phone.trim()) {
-      setFormError('Please complete all required fields before submitting.');
+    // Required fields check: Full Name, Email, Phone, and Resume
+    if (!fullName.trim() || !email.trim() || !phone.trim() || !resumeFile) {
+      setFormError('Please fill in all required fields and attach a resume.');
       return;
     }
 
@@ -68,7 +80,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
       email: email.trim(),
       phone: phone.trim(),
       experience,
-      resumeFileName: resumeFile ? resumeFile.name : 'resume_unattached.pdf',
+      resumeFileName: resumeFile.name,
       coverLetter: coverLetter.trim(),
       appliedDate: 'Just now',
       status: 'Submitted',
@@ -103,7 +115,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
             </p>
           </div>
           <button
-            onClick={onClose}
+            onClick={() => { resetForm(); onClose(); }}
             className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
@@ -233,7 +245,7 @@ export const ApplicationModal: React.FC<ApplicationModalProps> = ({
           <div className="pt-3 flex items-center justify-end gap-3 border-t border-slate-100">
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => { resetForm(); onClose(); }}
               className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors cursor-pointer"
             >
               Cancel

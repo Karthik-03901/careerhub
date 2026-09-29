@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Application } from '../types/job';
-import { CheckCircle, X, ExternalLink, ArrowRight } from 'lucide-react';
+import { CheckCircle, X, ArrowRight } from 'lucide-react';
 
 interface SuccessModalProps {
   application: Application | null;

@@ -14,7 +14,8 @@ export interface Job {
   jobType: JobType;
   workplaceType: WorkplaceType;
   skills: string[];
-  postedDate: string;
+  postedDate: string; // human-readable label shown in UI
+  postedAt: number;   // Unix ms timestamp – used for "Most Recent" sort
   description: string;
   responsibilities: string[];
   requirements: string[];

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Search, MapPin, Sparkles, TrendingUp } from 'lucide-react';
-import { LOCATIONS } from '../data/mockData';
+import { LOCATIONS, MOCK_JOBS } from '../data/mockData';
 
 interface HeroProps {
   keywordInput: string;
@@ -28,6 +28,9 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   const trendingTags = ['Python', 'Remote', 'Frontend', 'AI/ML', 'DevOps', 'Internship'];
+  const totalRoles    = MOCK_JOBS.length;
+  const totalFirms    = new Set(MOCK_JOBS.map((j) => j.company)).size;
+  const topSalary     = Math.max(...MOCK_JOBS.map((j) => j.salary));
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50 pt-10 pb-12 sm:pt-14 sm:pb-16 border-b border-slate-200">
@@ -119,15 +122,15 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Quick Stats Grid */}
         <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto pt-8 border-t border-slate-200/70">
           <div className="text-center p-3 rounded-xl bg-white/70 border border-slate-100 shadow-2xs">
-            <p className="text-2xl sm:text-3xl font-extrabold text-slate-900">16+</p>
+            <p className="text-2xl sm:text-3xl font-extrabold text-slate-900">{totalRoles}</p>
             <p className="text-xs sm:text-sm text-slate-500 font-medium">Verified Active Roles</p>
           </div>
           <div className="text-center p-3 rounded-xl bg-white/70 border border-slate-100 shadow-2xs">
-            <p className="text-2xl sm:text-3xl font-extrabold text-blue-600">6</p>
+            <p className="text-2xl sm:text-3xl font-extrabold text-blue-600">{totalFirms}</p>
             <p className="text-xs sm:text-sm text-slate-500 font-medium">Top Tier Tech Firms</p>
           </div>
           <div className="text-center p-3 rounded-xl bg-white/70 border border-slate-100 shadow-2xs">
-            <p className="text-2xl sm:text-3xl font-extrabold text-indigo-600">$175k</p>
+            <p className="text-2xl sm:text-3xl font-extrabold text-indigo-600">${(topSalary / 1000).toFixed(0)}k</p>
             <p className="text-xs sm:text-sm text-slate-500 font-medium">Top Annual Salary</p>
           </div>
           <div className="text-center p-3 rounded-xl bg-white/70 border border-slate-100 shadow-2xs">
