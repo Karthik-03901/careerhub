@@ -4,6 +4,8 @@
 
 A modern recruitment and job search web platform built for **TECH ODYSSEY 2026 — ROUND 2 DEBUGGING CHALLENGE (WEBSITE #5)**.
 
+🌐 **Live Website:** [https://trithish0-star.github.io/web5/](https://trithish0-star.github.io/web5/)
+
 ---
 
 ## 🚀 Tech Stack
